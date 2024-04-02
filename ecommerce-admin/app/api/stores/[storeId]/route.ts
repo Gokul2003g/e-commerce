@@ -1,12 +1,10 @@
-import { NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs";
-
 import prismadb from "@/lib/prismadb";
-
+import { auth } from "@clerk/nextjs";
+import { NextResponse } from "next/server";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string } }
+  { params }: { params: { storeId: string } },
 ) {
   try {
     const { userId } = auth();
@@ -32,21 +30,20 @@ export async function PATCH(
         userId,
       },
       data: {
-        name
-      }
+        name,
+      },
     });
-  
+
     return NextResponse.json(store);
   } catch (error) {
-    console.log('[STORE_PATCH]', error);
+    console.log("[STORE_PATCH]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-};
-
+}
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { storeId: string } }
+  { params }: { params: { storeId: string } },
 ) {
   try {
     const { userId } = auth();
@@ -62,13 +59,13 @@ export async function DELETE(
     const store = await prismadb.store.deleteMany({
       where: {
         id: params.storeId,
-        userId
-      }
+        userId,
+      },
     });
-  
+
     return NextResponse.json(store);
   } catch (error) {
-    console.log('[STORE_DELETE]', error);
+    console.log("[STORE_DELETE]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-};
+}
