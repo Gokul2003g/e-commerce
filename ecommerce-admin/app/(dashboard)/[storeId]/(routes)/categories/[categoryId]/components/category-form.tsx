@@ -1,16 +1,16 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Billboard, Category } from "@prisma/client";
+import * as z from "zod";
 import axios from "axios";
-import { Trash } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import * as z from "zod";
+import { Trash } from "lucide-react";
+import { Billboard, Category } from "@prisma/client";
+import { useParams, useRouter } from "next/navigation";
 
-import { AlertModal } from "@/components/modals/alert-modal";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -20,8 +20,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Separator } from "@/components/ui/separator";
 import { Heading } from "@/components/ui/heading";
-import { Input } from "@/components/ui/input";
+import { AlertModal } from "@/components/modals/alert-modal";
 import {
   Select,
   SelectContent,
@@ -29,7 +30,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
 
 const formSchema = z.object({
   name: z.string().min(2),
