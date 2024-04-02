@@ -101,8 +101,8 @@ export default function StoreSwitcher({
             <CommandGroup>
               <CommandItem
                 onSelect={() => {
-                  setOpen(true);
-                  storeModal.onOpen();
+                  setOpen(false);
+                  storeModal.onClose();
                 }}
               >
                 <PlusCircle className="mr-2 h-5 w-5" />
